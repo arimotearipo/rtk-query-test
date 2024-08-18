@@ -24,6 +24,13 @@ export type Movie = {
   Year: string;
 };
 
+export type MoviePayload = {
+  movie_id: string;
+  title: string;
+  director_name: string;
+  year: string;
+};
+
 export type MovieResponse = {
   data: Movie[];
 };
