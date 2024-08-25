@@ -5,6 +5,7 @@ import {
   useLazyGetMovieByIdQuery,
   useUpdateMovieByIdMutation,
 } from "../../services/movies.service";
+import { useNavigate } from "react-router-dom";
 
 function AllMovies() {
   const { data, isLoading } = useGetAllMoviesQuery();
@@ -185,10 +186,11 @@ const NAVS = [
 
 function Movies() {
   const [currentMovieUI, setCurrentMovieUI] = useState<string>(NAVS[0]);
+  const navigate = useNavigate();
 
   const renderNavs = useMemo(
-    () =>
-      NAVS.map((nav) => {
+    () => [
+      ...NAVS.map((nav) => {
         const className =
           currentMovieUI === nav
             ? "rounded-md bg-purple-800 p-2 text-white"
@@ -200,7 +202,11 @@ function Movies() {
           </ul>
         );
       }),
-    [NAVS, currentMovieUI],
+      <ul className={"rounded-md bg-purple-500 p-2"}>
+        <button onClick={() => navigate("/")}>Go Back</button>
+      </ul>,
+    ],
+    [currentMovieUI, navigate],
   );
 
   const renderMovieUI = useCallback(() => {

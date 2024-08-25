@@ -7,21 +7,21 @@ import { axiosBaseQuery } from "./baseQuery";
 export const movieApi = createApi({
   reducerPath: "movieApi",
   tagTypes: ["movies"],
-  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:8080" }),
+  baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:8080/movies" }),
   endpoints: (builder) => ({
     getMovieById: builder.query<MovieResponse, string>({
-      query: (id) => ({ url: `/movies/${id}` }),
+      query: (id) => ({ url: `/${id}` }),
     }),
     getAllMovies: builder.query<MovieResponse, void>({
-      query: () => ({ url: `/movies/all` }),
+      query: () => ({ url: `/` }),
     }),
     deleteMovieById: builder.mutation<void, string>({
-      query: (id) => ({ url: `/movies/${id}`, method: "DELETE" }),
+      query: (id) => ({ url: `/${id}`, method: "DELETE" }),
       invalidatesTags: ["movies"],
     }),
     updateMovieById: builder.mutation<void, MoviePayload>({
       query: (payload) => ({
-        url: `/movies/${payload.movie_id}`,
+        url: `/${payload.movie_id}`,
         method: "PUT",
         data: payload,
       }),

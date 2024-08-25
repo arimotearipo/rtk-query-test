@@ -11,6 +11,7 @@ export type DirectorResponse = {
 };
 
 export type DirectorPayload = {
+  director_id: string;
   name: string;
   gender: string;
   date_of_birth: string;
